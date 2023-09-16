@@ -1,0 +1,37 @@
+{
+  "user": {
+    "delete_success": "User deleted successfully",
+    "delete_all": "All users deleted successfully",
+    "update_success": "User updated successfully",
+    "update_password_success": "Password updated successfully",
+    "activate_account_success": "Your account has been activated successfully",
+    "deactivate": "Your account has been deactivated successfully. You will be logged out now."
+  },
+  "post": {
+    "delete_success": "Post deleted successfully",
+    "create_success": "Post created successfully",
+    "update_success": "Post updated successfully",
+    "delete_all": "All posts deleted successfully",
+    "unknown": "Unknown",
+    "not_found": "No posts found at the moment"
+  },
+  "bookmark": {
+    "delete_success": "Bookmark deleted successfully",
+    "delete_all": "All bookmarks deleted successfully"
+  },
+  "mail": {
+    "send_success": "Email sent to: ",
+    "password": {
+      "title": "Reset Your Password",
+      "subject": "Reset Your Password - Action required within 10 minutes!",
+      "content": "If you are requested to reset your password, please do so now within 10 minutes. Otherwise, ignore this message.",
+      "button_text": "Reset Password"
+    },
+    "account": {
+      "title": "Activate Your Account",
+      "subject": "Activate Your Account - Action required within 10 minutes",
+      "content": "If you are requested to activate your account, please activate it now within 10 minutes. Otherwise, ignore this message.",
+      "button_text": "Activate Account"
+    }
+  }
+}

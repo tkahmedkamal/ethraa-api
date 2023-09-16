@@ -1,0 +1,39 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Email</title>
+    <link
+      href='https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css'
+      rel='stylesheet'
+    />
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap'
+      rel='stylesheet'
+    />
+
+    <style>
+      h3,p,a { font-family: 'Cairo', sans-serif !important; line-height: 1.6 !important; }
+    </style>
+  </head>
+
+  <body>
+    <div
+      class='min-w-screen flex min-h-screen items-center justify-center bg-[#e4edf1]'
+    >
+      <div
+        class='max-w-xl rounded-2xl bg-white p-14 text-center text-gray-800 shadow-2xl lg:max-w-3xl lg:p-12'
+      >
+        <h3 class='text-2xl font-bold'>{{title}}</h3>
+        <p class='my-8 text-xl font-medium'>{{content}}</p>
+        <a
+          href='{{url}}'
+          class='inline-block rounded-full bg-blue-600 px-8 py-4 font-bold text-white'
+        >{{buttonText}}</a>
+      </div>
+    </div>
+  </body>
+</html>

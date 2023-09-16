@@ -1,0 +1,88 @@
+{
+  "global": {
+    "wrong": "An error occurred, please try again.",
+    "duplicate": "Field value is duplicated: {}. Please use another value!",
+    "cast_error": "Invalid identifier",
+    "systems_error": "There is some error, please contact the site administrator.",
+    "cloudinary_image": "Failed to upload the image, please try again later.",
+    "invalid_token": "Invalid or expired token",
+    "rate_limit": "Too many requests, You only have 10 requests, please try again after 1 hour."
+  },
+  "guard": {
+    "unAuth": "You are not logged in! Please log in to access.",
+    "userNotExist": "The user who owns this token no longer exists.",
+    "permission": "You do not have permission to perform this action."
+  },
+  "mail_error": "Failed to send the email, please try again.",
+  "user": {
+    "name": {
+      "required": "Please provide your name!",
+      "minLength": "Name must be at least 3 characters long.",
+      "maxLength": "Name cannot exceed 50 characters.",
+      "isString": "Name must be a string."
+    },
+    "username": {
+      "required": "Username is required.",
+      "minLength": "Username must be at least 3 characters long.",
+      "maxLength": "Username cannot exceed 20 characters.",
+      "isString": "Username must be a string."
+    },
+    "email": {
+      "required": "Email is required.",
+      "isEmail": "Please enter a valid email address."
+    },
+    "password": {
+      "required": "Password is required.",
+      "minLength": "Password must be at least 8 characters long.",
+      "confirm": "Password confirmation is required.",
+      "match": "Passwords do not match.",
+      "isString": "Password must be a string.",
+      "confirmIsString": "Password confirmation must be a string."
+    },
+    "role": "Role must be either: admin or user.",
+    "isAdmin": "Admin permission must be [true, false].",
+    "isActive": "Active user permission must be [true, false].",
+    "isActiveAccount": "Active account permission must be [true, false].",
+    "isInfluential": "Influential user permission must be [true, false].",
+    "old_password": "Old password is incorrect.",
+    "not_found": "This user is not registered with us.",
+    "credentials": "Invalid registration data.",
+    "deactivate_admin": "Admins are not allowed to deactivate their accounts.",
+    "change_avatar_not_belong": "You are not allowed to change the avatar of an account that does not belong to you.",
+    "not_follow_me": "You are not allowed to follow yourself."
+  },
+  "post": {
+    "quote": {
+      "isString": "Post must be a string.",
+      "required": "Post content is required.",
+      "minLength": "Post must contain at least one character."
+    },
+    "userId": {
+      "id": "Invalid user identifier.",
+      "required": "The post must be associated with a registered user."
+    },
+    "quoteFor": {
+      "isString": "Quoted person's name must be a string.",
+      "minLength": "Quoted person's name must be at least 3 characters long."
+    },
+    "isLiked": "isLiked must be [true, false].",
+    "isDisliked": "isDisliked must be [true, false].",
+    "isPublic": "Publication permission must be [true, false].",
+    "isUserActive": "User's active permission associated with the post must be [true, false].",
+    "not_belong_to_user": "This post does not belong to you.",
+    "not_found": "This post is not registered with us.",
+    "unpublished": "Liking or disliking a private post is not allowed.",
+    "not_account_active": "You are not allowed to create a post. Verify your account first."
+  },
+  "bookmark": {
+    "user": {
+      "id": "Invalid user identifier.",
+      "required": "The bookmark must be associated with a registered user."
+    },
+    "post": {
+      "id": "Invalid post identifier.",
+      "required": "The bookmark must be associated with a registered post."
+    },
+    "not_found": "There are currently no bookmarks."
+  }
+}
