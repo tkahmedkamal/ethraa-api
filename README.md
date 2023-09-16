@@ -12,6 +12,10 @@
 - Arabic
 - English
 
+## Api Link
+
+[https://ethraa-api.up.railway.app/api](https://ethraa-api.up.railway.app/api)
+
 ## API Reference
 
 #### Auth Endpoints
@@ -172,6 +176,10 @@
 
 ```
   DELETE /api/bookmarks/${id}
+```
+
+```
+  DELETE /api/bookmarks
 ```
 
 ## Installation
