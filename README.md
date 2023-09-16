@@ -13,10 +13,7 @@
 - English
 
 ## Api Link
-<<<<<<< HEAD
 
-=======
->>>>>>> f89afd3ac56ac364800db24240020f840f0d17ec
 [https://ethraa-api.up.railway.app/api](https://ethraa-api.up.railway.app/api)
 
 ## API Reference
