@@ -28,6 +28,9 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionFilter(httpAdapterHost, i18nService));
 
   const PORT = app.get(ConfigService).get('PORT') || 4000;
+  app.enableCors({
+    origin: 'http://localhost:5173',
+  });
   await app.listen(PORT);
 }
 bootstrap();
