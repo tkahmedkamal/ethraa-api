@@ -85,7 +85,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"{{PASSWORD}}\"\r\n}",
+							"raw": "{\r\n    \"username\": \"user1\",\r\n    \"password\": \"{{PASSWORD}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -372,7 +372,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"test\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Hussein Safina\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -425,7 +425,7 @@
 								"header": [
 									{
 										"key": "accept-language",
-										"value": "ar",
+										"value": "en",
 										"type": "text",
 										"disabled": true
 									}
@@ -577,117 +577,6 @@
 							"response": []
 						},
 						{
-							"name": "Update Password",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PATCH",
-								"header": [
-									{
-										"key": "accept-language",
-										"value": "ar",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"password\": \"{{PASSWORD}}\",\r\n    \"confirmPassword\": \"{{PASSWORD}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}/users/update-password/user1",
-									"host": [
-										"{{URL}}"
-									],
-									"path": [
-										"users",
-										"update-password",
-										"user1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update User",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "PATCH",
-								"header": [
-									{
-										"key": "accept-language",
-										"value": "ar",
-										"type": "text",
-										"disabled": true
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"test\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}/users/user1",
-									"host": [
-										"{{URL}}"
-									],
-									"path": [
-										"users",
-										"user1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Find User",
 							"event": [
 								{
@@ -833,6 +722,117 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Update Password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "accept-language",
+										"value": "ar",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"{{PASSWORD}}\",\r\n    \"confirmPassword\": \"{{PASSWORD}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/users/update-password/user1",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users",
+										"update-password",
+										"user1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "accept-language",
+										"value": "ar",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"role\": \"user\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/users/user1",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users",
+										"user1"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -872,14 +872,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{URL}}/users/for-users/user3",
+									"raw": "{{URL}}/users/for-users/user2",
 									"host": [
 										"{{URL}}"
 									],
 									"path": [
 										"users",
 										"for-users",
-										"user3"
+										"user2"
 									]
 								}
 							},
@@ -929,7 +929,114 @@
 										},
 										{
 											"key": "page",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find User Followers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/users/user-followers/user3",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users",
+										"user-followers",
+										"user3"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "createdAt",
+											"disabled": true
+										},
+										{
+											"key": "limit",
 											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find User Following",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/users/user-following/user4",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"users",
+										"user-following",
+										"user4"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "createdAt",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "",
 											"disabled": true
 										}
 									]
@@ -971,14 +1078,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{URL}}/users/follow/user1",
+									"raw": "{{URL}}/users/follow/user2",
 									"host": [
 										"{{URL}}"
 									],
 									"path": [
 										"users",
 										"follow",
-										"user1"
+										"user2"
 									]
 								}
 							},
@@ -1057,11 +1164,6 @@
 							],
 							"query": [
 								{
-									"key": "search",
-									"value": "",
-									"disabled": true
-								},
-								{
 									"key": "sort",
 									"value": "createdAt",
 									"disabled": true
@@ -1074,6 +1176,11 @@
 								{
 									"key": "page",
 									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "",
 									"disabled": true
 								}
 							]
@@ -1121,6 +1228,116 @@
 							"path": [
 								"users",
 								"top-liked-posts-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Theme",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept-language",
+								"value": "ar",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isDarkMode\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/update-theme",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"update-theme"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Language",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept-language",
+								"value": "ar",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"language\": \"ar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/update-language",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"update-language"
 							]
 						}
 					},
@@ -1192,34 +1409,6 @@
 					"name": "Admin Role",
 					"item": [
 						{
-							"name": "Find Post",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{token}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{URL}}/posts/64f73767088b7108464cdada",
-									"host": [
-										"{{URL}}"
-									],
-									"path": [
-										"posts",
-										"64f73767088b7108464cdada"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Find All Posts",
 							"request": {
 								"auth": {
@@ -1263,6 +1452,34 @@
 											"value": "1",
 											"disabled": true
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Post",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/posts/64f88c1592f8134aac8e270e",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"posts",
+										"64f88c1592f8134aac8e270e"
 									]
 								}
 							},
@@ -1486,7 +1703,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"quote\": \"test\",\r\n    \"quoteFor\": \"test\"\r\n}",
+									"raw": "{\r\n    \"quote\": \"test3\",\r\n    \"quoteFor\": null\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1520,23 +1737,15 @@
 								},
 								"method": "PATCH",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"postId\": \"64f7389b0eb965473f409009\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{URL}}/posts/like",
+									"raw": "{{URL}}/posts/like/65059cf5476b85ed0973e972",
 									"host": [
 										"{{URL}}"
 									],
 									"path": [
 										"posts",
-										"like"
+										"like",
+										"65059cf5476b85ed0973e972"
 									]
 								}
 							},
@@ -1557,23 +1766,15 @@
 								},
 								"method": "PATCH",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"postId\": \"64f73767088b7108464cdada\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{URL}}/posts/dislike",
+									"raw": "{{URL}}/posts/dislike/65059cf5476b85ed0973e972",
 									"host": [
 										"{{URL}}"
 									],
 									"path": [
 										"posts",
-										"dislike"
+										"dislike",
+										"65059cf5476b85ed0973e972"
 									]
 								}
 							},
@@ -1582,7 +1783,7 @@
 					]
 				},
 				{
-					"name": "Find Top Fifty Posts",
+					"name": "Find Top Ten Posts",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1604,27 +1805,22 @@
 							}
 						],
 						"url": {
-							"raw": "{{URL}}/posts/top-fifty-posts",
+							"raw": "{{URL}}/posts/top-ten-posts",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
 								"posts",
-								"top-fifty-posts"
+								"top-ten-posts"
 							],
 							"query": [
 								{
-									"key": "search",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "sort",
-									"value": "",
-									"disabled": true
-								},
-								{
 									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "limit",
 									"value": "1",
 									"disabled": true
 								}
@@ -1650,7 +1846,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"postId\": \"64f86dde34868e4d8ac1a365\"\r\n    // \"quote\": \"الخطُ الحسن يزيد الحق وضوحاً.\"\r\n    // \"quoteFor\": \"غير معروف\"\r\n    // \"isPublic\": true\r\n}",
+							"raw": "{\r\n    // \"quote\": \"منشور x\",\r\n    // \"quoteFor\": \"غير معروف\"\r\n    \"isPublic\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1658,12 +1854,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{URL}}/posts",
+							"raw": "{{URL}}/posts/651ada217f99e541c6624492",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
-								"posts"
+								"posts",
+								"651ada217f99e541c6624492"
 							]
 						}
 					},
@@ -1684,22 +1881,14 @@
 						},
 						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"postId\": \"64f86da0ff24ec97517e89e6\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{URL}}/posts",
+							"raw": "{{URL}}/posts/652e607c2f0e4eae0e2e0b50",
 							"host": [
 								"{{URL}}"
 							],
 							"path": [
-								"posts"
+								"posts",
+								"652e607c2f0e4eae0e2e0b50"
 							]
 						}
 					},
@@ -1839,7 +2028,12 @@
 									"query": [
 										{
 											"key": "limit",
-											"value": "5",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "3",
 											"disabled": true
 										}
 									]
