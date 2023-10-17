@@ -40,7 +40,7 @@ const envFilePath =
     }),
     ThrottlerModule.forRoot([
       {
-        limit: 10,
+        limit: 100000,
         ttl: 3600000, // 1 hour
       },
     ]),

@@ -13,7 +13,7 @@ export class Filter {
       ...this.queryString,
     };
     const excludeFields = ['search', 'sort', 'page', 'limit'];
-    excludeFields.forEach((field) => delete queries[field]);
+    excludeFields.forEach(field => delete queries[field]);
     this.query = this.query.find(queries);
 
     return this;
@@ -52,7 +52,7 @@ export class Filter {
 
   pagination(totalRecords: number) {
     const pageQuery = +this.queryString.page || 1;
-    const limitQuery = +this.queryString.limit || 2;
+    const limitQuery = +this.queryString.limit || 10;
     const skip = (pageQuery - 1) * limitQuery;
     const totalPages = Math.ceil(totalRecords / limitQuery);
 

@@ -7,10 +7,7 @@ export const postSchema = new Schema(
       required: [true, 'errors.post.quote.required'],
       minlength: [1, 'errors.post.quote.minLength'],
     },
-    quoteFor: {
-      type: String,
-      minlength: [3, 'errors.post.quoteFor.minLength'],
-    },
+    quoteFor: String,
     isPublic: {
       type: Boolean,
       default: true,
@@ -48,7 +45,8 @@ postSchema.pre<Query<any, Document>>(/^find/, function (next) {
   this.populate([
     {
       path: 'user',
-      select: 'name username avatar isInfluential isActive',
+      select:
+        'name username avatar bio followers following isInfluential isActive',
     },
     { path: 'likes', select: 'name' },
     { path: 'dislikes', select: 'name' },

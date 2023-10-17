@@ -5,7 +5,9 @@
     "update_success": "User updated successfully",
     "update_password_success": "Password updated successfully",
     "activate_account_success": "Your account has been activated successfully",
-    "deactivate": "Your account has been deactivated successfully. You will be logged out now."
+    "deactivate": "Your account has been deactivated successfully. You will be logged out now.",
+    "signup_success": "Your account has been created successfully.",
+    "login_success": "You have been logged in successfully."
   },
   "post": {
     "delete_success": "Post deleted successfully",
@@ -16,6 +18,7 @@
     "not_found": "No posts found at the moment"
   },
   "bookmark": {
+    "create_success": "The post's bookmark has been created successfully",
     "delete_success": "Bookmark deleted successfully",
     "delete_all": "All bookmarks deleted successfully"
   },

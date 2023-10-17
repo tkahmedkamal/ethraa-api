@@ -7,6 +7,7 @@ import {
   IsBoolean,
   IsArray,
   IsOptional,
+  IsNumber,
 } from 'class-validator';
 import { ObjectId } from 'bson';
 import { Match } from '../../auth/decorators';
@@ -54,6 +55,10 @@ export class CreateUserDto {
   @IsOptional()
   role: string;
 
+  @IsNumber({}, { message: 'errors.user.quoteCount' })
+  @IsOptional()
+  quoteCount: number;
+
   @IsBoolean({ message: 'errors.user.isAdmin' })
   @IsOptional()
   isAdmin: boolean;
@@ -66,9 +71,13 @@ export class CreateUserDto {
   @IsOptional()
   isActiveAccount: boolean;
 
-  @IsBoolean({ message: 'errors.user.isInfluential' })
+  @IsBoolean({ message: 'errors.user.isDarkMode' })
   @IsOptional()
-  isInfluential: boolean;
+  isDarkMode: boolean;
+
+  @IsString()
+  @IsOptional()
+  language: string;
 
   @IsString()
   @IsOptional()
@@ -81,10 +90,14 @@ export class CreateUserDto {
   @IsArray()
   @IsString({ each: true })
   @IsOptional()
-  followers: [string];
+  followers: [
+    { _id: ObjectId; name: string; username: string; avatar: string },
+  ];
 
   @IsArray()
   @IsString({ each: true })
   @IsOptional()
-  following: [string];
+  following: [
+    { _id: ObjectId; name: string; username: string; avatar: string },
+  ];
 }

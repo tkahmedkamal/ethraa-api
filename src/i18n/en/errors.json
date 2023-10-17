@@ -40,13 +40,14 @@
       "confirmIsString": "Password confirmation must be a string."
     },
     "role": "Role must be either: admin or user.",
+    "quoteCount": "Quote count must be a number.",
     "isAdmin": "Admin permission must be [true, false].",
     "isActive": "Active user permission must be [true, false].",
     "isActiveAccount": "Active account permission must be [true, false].",
-    "isInfluential": "Influential user permission must be [true, false].",
+    "isDarkMode": "Theme must be [true, false].",
     "old_password": "Old password is incorrect.",
     "not_found": "This user is not registered with us.",
-    "credentials": "Invalid registration data.",
+    "credentials": "Incorrect email or password.",
     "deactivate_admin": "Admins are not allowed to deactivate their accounts.",
     "change_avatar_not_belong": "You are not allowed to change the avatar of an account that does not belong to you.",
     "not_follow_me": "You are not allowed to follow yourself."
@@ -62,8 +63,7 @@
       "required": "The post must be associated with a registered user."
     },
     "quoteFor": {
-      "isString": "Quoted person's name must be a string.",
-      "minLength": "Quoted person's name must be at least 3 characters long."
+      "isString": "Quoted person's name must be a string."
     },
     "isLiked": "isLiked must be [true, false].",
     "isDisliked": "isDisliked must be [true, false].",

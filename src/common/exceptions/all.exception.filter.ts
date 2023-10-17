@@ -46,7 +46,7 @@ export class AllExceptionFilter implements ExceptionFilter {
         } else if (rateTime) {
           errors = this.handleRateLimitingError();
         } else {
-          errors = this.i18n.t(messages, { lang: I18nContext.current().lang });
+          errors = this.i18n.t(messages, { lang: I18nContext.current()?.lang });
         }
       }
     }

@@ -56,6 +56,14 @@ export const userSchema = new Schema(
       },
       default: 'user',
     },
+    quoteCount: {
+      type: Number,
+      default: 0,
+    },
+    language: {
+      type: String,
+      default: 'ar',
+    },
     isAdmin: {
       type: Boolean,
       default: false,
@@ -68,8 +76,11 @@ export const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    isInfluential: Boolean,
     isAccountVerified: Boolean,
+    isDarkMode: {
+      type: Boolean,
+      default: false,
+    },
     passwordChangeAt: Date,
     passwordResetToken: String,
     accountVerificationToken: String,

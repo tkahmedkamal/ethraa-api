@@ -10,6 +10,8 @@ import {
   UploadedFile,
   ParseFilePipe,
   MaxFileSizeValidator,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { SkipThrottle } from '@nestjs/throttler';
@@ -57,7 +59,7 @@ export class UserController {
 
   @Patch('update-me')
   updateMe(@User() user: CreateUserDto, @Body() body: UpdateUserDto) {
-    return this.userService.updateMe(user.username, body, user.role);
+    return this.userService.updateMe(user.username, body, user.role as Role);
   }
 
   @Patch('update-me-password')
@@ -68,6 +70,36 @@ export class UserController {
   @Delete('delete-me')
   deleteMe(@User() user: CreateUserDto) {
     return this.userService.deleteMe(user.username);
+  }
+
+  @Patch('update-theme')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  updateTheme(@User() user: CreateUserDto, @Body() body: UpdateUserDto) {
+    return this.userService.updateTheme(user.username, body);
+  }
+
+  @Patch('update-language')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  updateLanguage(@User() user: CreateUserDto, @Body() body: UpdateUserDto) {
+    return this.userService.updateLanguage(user.username, body);
+  }
+
+  @Auth(Role.USER)
+  @Get('user-followers/:username')
+  findUserFollowers(
+    @Param('username') username: string,
+    @Query() queryString: IQueryString,
+  ) {
+    return this.userService.findUserFollowers(username, queryString);
+  }
+
+  @Auth(Role.USER)
+  @Get('user-following/:username')
+  findUserFollowing(
+    @Param('username') username: string,
+    @Query() queryString: IQueryString,
+  ) {
+    return this.userService.findUserFollowing(username, queryString);
   }
 
   @Auth(Role.USER)

@@ -12,7 +12,7 @@ import { IQueryString } from '../common/interfaces';
 import { CreateUserDto } from '../user/dto';
 import { Role } from '../common/enums';
 import { IUser } from '../user/interfaces';
-import { IPost } from './interfaces';
+import { IPost, IPostPopulate } from './interfaces';
 import { CreatePostDto, UpdatePostDto } from './dto';
 
 @Injectable()
@@ -83,7 +83,7 @@ export class PostService {
 
   async create(user: CreateUserDto, body: CreatePostDto) {
     const { id: userId, isActiveAccount } = user;
-    const { quote, quoteFor } = body;
+    const { quote, quoteFor, isPublic } = body;
 
     if (!isActiveAccount) {
       throw new BadRequestException('errors.post.not_account_active');
@@ -100,6 +100,11 @@ export class PostService {
       quote,
       quoteFor: quoteForValue,
       user: userId,
+      isPublic,
+    });
+
+    await this.userModel.findByIdAndUpdate(userId, {
+      $inc: { quoteCount: 1 },
     });
 
     return {
@@ -135,10 +140,10 @@ export class PostService {
     };
   }
 
-  async update(user: CreateUserDto, body: UpdatePostDto) {
-    const { postId, quote, quoteFor, isPublic } = body;
+  async update(user: CreateUserDto, body: UpdatePostDto, postId: ObjectId) {
+    const { quote, quoteFor, isPublic } = body;
 
-    let post: Model<IPost>;
+    let post: Model<IPostPopulate>;
     const result = {
       status: 'success',
       message: this.i18n.t('messages.post.update_success', {
@@ -150,7 +155,6 @@ export class PostService {
       post = await this.postModel.findByIdAndUpdate(
         { _id: postId },
         {
-          postId,
           quote,
           quoteFor,
           isPublic,
@@ -168,20 +172,19 @@ export class PostService {
       };
     }
 
-    const targetPost = await this.postModel.findById(postId);
+    const targetPost = await this.postModel.findById<IPostPopulate>(postId);
 
     if (!targetPost) {
       throw new NotFoundException('errors.post.not_found');
     }
 
-    if (targetPost && targetPost?.user.toString() !== user.id.toString()) {
+    if (targetPost && targetPost?.user?._id.toString() !== user.id.toString()) {
       throw new BadRequestException('errors.post.not_belong_to_user');
     }
 
     post = await this.postModel.findByIdAndUpdate(
       { _id: postId },
       {
-        postId,
         quote,
         quoteFor,
         isPublic,
@@ -195,11 +198,30 @@ export class PostService {
     };
   }
 
-  async delete(postId: ObjectId) {
-    const post = await this.postModel.findByIdAndDelete(postId);
+  async delete(loggedInUser: CreateUserDto, postId: ObjectId) {
+    const { id, role } = loggedInUser;
+    let post: IPost | any;
+
+    if (role === Role.ADMIN) {
+      post = await this.postModel.findByIdAndDelete(postId);
+    } else {
+      post = await this.postModel.findOneAndDelete({
+        _id: postId,
+        user: id,
+      });
+    }
 
     if (!post) {
       throw new NotFoundException('errors.post.not_found');
+    }
+
+    if (post) {
+      await this.userModel.findOneAndUpdate(
+        { _id: post.user._id, quoteCount: { $gt: 0 } },
+        {
+          $inc: { quoteCount: -1 },
+        },
+      );
     }
 
     return {
@@ -232,15 +254,15 @@ export class PostService {
     return this.findAll(queryString, false, { user: user._id });
   }
 
-  async like(userId: ObjectId, { postId }: UpdatePostDto) {
+  async like(userId: ObjectId, postId: string) {
     return this.reactSystem(userId, postId, 'likes');
   }
 
-  async dislike(userId: ObjectId, { postId }: UpdatePostDto) {
+  async dislike(userId: ObjectId, postId: string) {
     return this.reactSystem(userId, postId, 'dislikes');
   }
 
-  async reactSystem(userId: ObjectId, postId: ObjectId, typeReact: string) {
+  async reactSystem(userId: ObjectId, postId: string, typeReact: string) {
     const targetPost = await this.postModel.findById(postId);
     let post: Model<IPost>;
     const result = {

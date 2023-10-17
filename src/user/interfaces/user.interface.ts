@@ -1,6 +1,7 @@
 import { ObjectId } from 'bson';
 
 export interface IUser {
+  _id?: string;
   name: string;
   username: string;
   email: string;
@@ -10,14 +11,16 @@ export interface IUser {
   avatar?: string;
   bio?: string;
   role?: string;
+  quoteCount?: number;
   isAdmin?: boolean;
   isActive?: boolean;
   isActiveAccount?: boolean;
-  isInfluential?: boolean;
+  isDarkMode?: boolean;
+  language?: string;
   facebook?: string;
   twitter?: string;
-  followers?: [string];
-  following?: [string];
+  followers?: [];
+  following?: [];
   passwordResetToken?: string;
   passwordResetTokenExpiration?: Date;
   accountVerificationToken?: string;

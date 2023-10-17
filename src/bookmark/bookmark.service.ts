@@ -26,11 +26,11 @@ export class BookmarkService {
     const bookmarks = await filter.getQuery.populate([
       {
         path: 'post',
-        select: 'quote quoteFor',
+        select: 'quote quoteFor createdAt',
       },
       {
         path: 'user',
-        select: 'name',
+        select: 'name username',
       },
     ]);
 
@@ -43,10 +43,16 @@ export class BookmarkService {
   }
 
   async findAllForUser(userId: ObjectId, queryString: IQueryString) {
+    const total_records = await this.bookmarkModel.countDocuments({
+      user: userId,
+    });
+
     const filter = new Filter(
       this.bookmarkModel.find({ user: userId }),
       queryString,
-    ).filter();
+    )
+      .filter()
+      .pagination(total_records);
 
     const bookmarks = await filter.getQuery.populate([
       {
@@ -55,28 +61,31 @@ export class BookmarkService {
           isUserActive: true,
           isPublic: true,
         },
-        select: 'quote quoteFor',
+        select: 'quote quoteFor createdAt',
       },
       {
         path: 'user',
-        select: 'name',
+        select: 'name username',
       },
     ]);
 
-    const filteredBookmarks = bookmarks.filter(
-      (bookmark: CreateBookmarkDto) => bookmark.post !== null,
+    const bookmarkFiltered = bookmarks.filter(
+      (bookmark: IBookmark) => bookmark.post !== null,
     );
 
     return {
       status: 'success',
-      total_records: filteredBookmarks.length,
-      pagination: filter.pagination(filteredBookmarks.length).getPagination,
-      data: filteredBookmarks,
+      total_records,
+      pagination: filter.getPagination,
+      data: bookmarkFiltered,
     };
   }
 
   async create(userId: ObjectId, body: CreateBookmarkDto) {
     const { post: postId } = body;
+    const result = {
+      statusbar: 'success',
+    };
 
     const post = await this.postModel.findOne({
       _id: postId,
@@ -95,16 +104,26 @@ export class BookmarkService {
 
     if (checkUserPostIsExist) {
       await this.bookmarkModel.findByIdAndDelete(checkUserPostIsExist.id);
+
+      return {
+        ...result,
+        message: this.i18n.t('messages.bookmark.delete_success', {
+          lang: I18nContext.current().lang,
+        }),
+      };
     } else {
       await this.bookmarkModel.create({
         user: userId,
         post: postId,
       });
-    }
 
-    return {
-      status: 'success',
-    };
+      return {
+        ...result,
+        message: this.i18n.t('messages.bookmark.create_success', {
+          lang: I18nContext.current().lang,
+        }),
+      };
+    }
   }
 
   async delete(bookmarkId: ObjectId) {

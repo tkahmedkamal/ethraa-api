@@ -14,7 +14,6 @@ export class CreatePostDto {
   user = new ObjectId();
 
   @IsString({ message: 'errors.post.quoteFor.isString' })
-  @MinLength(3, { message: 'errors.post.quoteFor.minLength' })
   @IsOptional()
   quoteFor: string;
 

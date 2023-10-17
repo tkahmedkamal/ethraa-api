@@ -30,11 +30,26 @@ export class UserService {
   ) {}
 
   async findAll(role: string, queryString: IQueryString, otherFilters = {}) {
+    const searchName = queryString?.search
+      ? {
+          $or: [
+            { name: { $regex: queryString.search, $options: 'i' } },
+            { bio: { $regex: queryString.search, $options: 'i' } },
+          ],
+        }
+      : {};
+
     const userRoleFilter =
-      role === Role.USER ? { isActive: true, role: Role.USER } : {};
+      role === Role.USER
+        ? {
+            isActive: true,
+            role: Role.USER,
+          }
+        : {};
     const total_records = await this.userModel.countDocuments({
       ...userRoleFilter,
       ...otherFilters,
+      ...searchName,
     });
 
     const filter = new Filter(
@@ -70,9 +85,19 @@ export class UserService {
       followers.push(...follower.followers);
     });
 
-    const followersFiltered = followers.filter(
-      follow => follow.toString() !== user.id.toString(),
-    );
+    const followersFiltered = followers.filter(follow => {
+      const followIdString = follow.toString();
+      const userIdString = user.id.toString();
+
+      if (followIdString === userIdString) {
+        return false;
+      }
+
+      const isFollowed = user.following.some(
+        following => following._id.toString() === followIdString,
+      );
+      return !isFollowed;
+    });
 
     return this.findAll('user', queryString, {
       _id: { $in: followersFiltered },
@@ -83,7 +108,7 @@ export class UserService {
     return await this.findOne(username);
   }
 
-  async updateMe(username: string, userData: UpdateUserDto, userRole: string) {
+  async updateMe(username: string, userData: UpdateUserDto, userRole: Role) {
     return await this.update(username, userData, userRole);
   }
 
@@ -106,13 +131,45 @@ export class UserService {
 
     return {
       status: 'success',
-      message: 'message.user.update_password_success',
+      message: this.i18n.t('messages.user.update_password_success', {
+        lang: I18nContext.current().lang,
+      }),
       data: user,
     };
   }
 
   async deleteMe(username: string) {
     return await this.delete(username);
+  }
+
+  async updateTheme(username: string, body: UpdateUserDto) {
+    const { isDarkMode } = body;
+    return await this.setting(username, { isDarkMode });
+  }
+
+  async updateLanguage(username: string, body: UpdateUserDto) {
+    const { language } = body;
+    return await this.setting(username, { language });
+  }
+
+  async findUserFollowers(username: string, queryString: IQueryString) {
+    const user = await this.userModel.findOne({ username });
+
+    if (!user) {
+      throw new NotFoundException('errors.user.not_found');
+    }
+
+    return this.findAll(Role.USER, queryString, { following: user._id });
+  }
+
+  async findUserFollowing(username: string, queryString: IQueryString) {
+    const user = await this.userModel.findOne({ username });
+
+    if (!user) {
+      throw new NotFoundException('errors.user.not_found');
+    }
+
+    return this.findAll(Role.USER, queryString, { followers: user._id });
   }
 
   async deactivate(loggedUser: UpdateUserDto) {
@@ -272,19 +329,14 @@ export class UserService {
     };
   }
 
-  async update(
-    username: string,
-    body: UpdateUserDto,
-    userRole: string = Role.ADMIN,
-  ) {
-    const { name, bio, avatar, role, facebook, twitter } = body;
+  async update(username: string, body: UpdateUserDto, userRole = Role.ADMIN) {
+    const { name, bio, role, facebook, twitter } = body;
 
     const user = await this.userModel.findOneAndUpdate(
       { username },
       {
         name,
         bio,
-        avatar,
         role: userRole === Role.USER ? Role.USER : role,
         isAdmin: userRole === Role.ADMIN && role === Role.ADMIN,
         facebook,
@@ -299,7 +351,9 @@ export class UserService {
 
     return {
       status: 'success',
-      message: this.i18n.t('messages.user.update_success'),
+      message: this.i18n.t('messages.user.update_success', {
+        lang: I18nContext.current().lang,
+      }),
       data: user,
     };
   }
@@ -353,5 +407,21 @@ export class UserService {
       },
       { new: true },
     );
+  }
+
+  async setting(
+    username: string,
+    newData: {
+      isDarkMode?: boolean;
+      language?: string;
+    },
+  ) {
+    const user = await this.userModel.findOneAndUpdate({ username }, newData, {
+      new: true,
+    });
+
+    if (!user) {
+      throw new NotFoundException('errors.user.not_found');
+    }
   }
 }

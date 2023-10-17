@@ -50,6 +50,9 @@ export class AuthService {
       });
       return {
         status: 'success',
+        message: this.i18n.t('messages.user.signup_success', {
+          lang: I18nContext.current().lang,
+        }),
         data: user,
         access_token: token,
       };
@@ -89,6 +92,9 @@ export class AuthService {
 
       return {
         status: 'success',
+        message: this.i18n.t('messages.user.login_success', {
+          lang: I18nContext.current().lang,
+        }),
         data: user,
         access_token: token,
       };
@@ -104,7 +110,7 @@ export class AuthService {
       label: 'password',
       findBy: { $or: [{ email }, { username }] },
       generateToken: 'generateResetPasswordToken',
-      url: 'reset-password',
+      url: 'auth/reset-password',
     });
   }
 

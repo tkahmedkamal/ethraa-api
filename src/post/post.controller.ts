@@ -28,9 +28,9 @@ export class PostController {
     private readonly statsService: StatsService,
   ) {}
 
-  @Get('top-fifty-posts')
-  findTopFiftyPosts() {
-    return this.statsService.findTopFiftyPosts();
+  @Get('top-ten-posts')
+  findTopFiftyPosts(@Query() queryString: IQueryString) {
+    return this.statsService.findTopTenPosts(queryString);
   }
 
   @Auth(Role.ADMIN)
@@ -66,14 +66,18 @@ export class PostController {
     return this.postService.create(user, body);
   }
 
-  @Patch()
-  update(@User() user: CreateUserDto, @Body() body: UpdatePostDto) {
-    return this.postService.update(user, body);
+  @Patch(':postId')
+  update(
+    @User() user: CreateUserDto,
+    @Body() body: UpdatePostDto,
+    @Param('postId') postId: ObjectId,
+  ) {
+    return this.postService.update(user, body, postId);
   }
 
-  @Delete()
-  delete(@Body('postId') postId: ObjectId) {
-    return this.postService.delete(postId);
+  @Delete(':postId')
+  delete(@User() user: CreateUserDto, @Param('postId') postId: ObjectId) {
+    return this.postService.delete(user, postId);
   }
 
   @Get('for-user/:username')
@@ -86,15 +90,15 @@ export class PostController {
   }
 
   @Auth(Role.USER)
-  @Patch('like')
-  like(@User() user: CreateUserDto, @Body() body: UpdatePostDto) {
-    return this.postService.like(user.id, body);
+  @Patch('like/:postId')
+  like(@User() user: CreateUserDto, @Param('postId') postId: string) {
+    return this.postService.like(user.id, postId);
   }
 
   @Auth(Role.USER)
-  @Patch('dislike')
-  dislike(@User() user: CreateUserDto, @Body() body: UpdatePostDto) {
-    return this.postService.dislike(user.id, body);
+  @Patch('dislike/:postId')
+  dislike(@User() user: CreateUserDto, @Param('postId') postId: string) {
+    return this.postService.dislike(user.id, postId);
   }
 
   @Auth(Role.ADMIN)

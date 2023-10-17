@@ -48,13 +48,13 @@ export class AuthController {
   }
 
   @HttpCode(HttpStatus.OK)
-  @Auth(Role.USER)
+  @Auth(Role.ADMIN, Role.USER)
   @Post('verify-account-token')
   verifyAccountToken(@User() user: UpdateUserDto) {
     return this.authService.verifyAccountToken(user);
   }
 
-  @Auth(Role.USER)
+  @Auth(Role.ADMIN, Role.USER)
   @Patch('activate-account')
   activateAccount(@Query('token') token: string) {
     return this.authService.activateAccount(token);
