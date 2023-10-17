@@ -18,7 +18,7 @@
 
 ## Frontend Repository Link
 
-[ethraa-frontend repo](https://ethraa.vercel.app/)
+[ethraa-frontend repo](https://github.com/tkahmedkamal/ethraa-frontend)
 
 ## API Reference
 
