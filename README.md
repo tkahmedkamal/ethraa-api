@@ -16,6 +16,10 @@
 
 [https://ethraa-api.up.railway.app/api](https://ethraa-api.up.railway.app/api)
 
+## Frontend Repository Link
+
+[ethraa-frontend repo](https://ethraa.vercel.app/)
+
 ## API Reference
 
 #### Auth Endpoints
@@ -110,6 +114,14 @@
   DELETE /api/users
 ```
 
+```
+  PATCH /api/users/update-theme
+```
+
+```
+  PATCH /api/users/update-language
+```
+
 #### Post Endpoints
 
 ```
@@ -137,23 +149,23 @@
 ```
 
 ```
-  POST /api/posts
+  POST /api/posts/${id}
 ```
 
 ```
-  PATCH /api/posts
+  PATCH /api/posts/${id}
 ```
 
 ```
-  PATCH /api/posts/like
+  PATCH /api/posts/like/${id}
 ```
 
 ```
-  PATCH /api/posts/dislike
+  PATCH /api/posts/dislike/${id}
 ```
 
 ```
-  DELETE /api/posts
+  DELETE /api/posts/${id}
 ```
 
 ```
