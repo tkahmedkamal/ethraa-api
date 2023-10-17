@@ -29,7 +29,7 @@ async function bootstrap() {
 
   const PORT = app.get(ConfigService).get('PORT') || 4000;
   app.enableCors({
-    origin: 'http://localhost:5173',
+    origin: 'https://ethraa.vercel.app',
   });
   await app.listen(PORT);
 }
