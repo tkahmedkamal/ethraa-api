@@ -26,10 +26,11 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
   app.useGlobalFilters(new AllExceptionFilter(httpAdapterHost, i18nService));
+  const frontendUrl = app.get(ConfigService).get('FRONT_BASE_URL');
 
   const PORT = app.get(ConfigService).get('PORT') || 4000;
   app.enableCors({
-    origin: 'https://ethraa.vercel.app',
+    origin: frontendUrl,
   });
   await app.listen(PORT);
 }
