@@ -34,7 +34,7 @@ const envFilePath =
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => {
         return {
-          uri: config.get('DATABASE_URL'),
+          uri: config.get('DATABASE_URL') || '',
         };
       },
     }),
