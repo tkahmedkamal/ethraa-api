@@ -4,7 +4,7 @@
 
 .env.production
 .env.development.local
-vercel.json
+# vercel.json
 
 # Logs
 logs
