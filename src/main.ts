@@ -29,9 +29,10 @@ async function bootstrap() {
   const frontendUrl = app.get(ConfigService).get('FRONT_BASE_URL');
 
   const PORT = app.get(ConfigService).get('PORT') || 4000;
-  app.enableCors({
-    origin: '*',
-  });
+  // app.enableCors({
+  //   origin: frontendUrl,
+  // });
+  app.enableCors();
   await app.listen(PORT);
 }
 bootstrap();
