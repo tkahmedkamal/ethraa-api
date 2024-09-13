@@ -14,7 +14,7 @@
 
 ## Api Link
 
-[https://ethraa-api.up.railway.app/api](https://ethraa-api.vercel.app/api)
+[https://ethraa-api.vercel.app/api](https://ethraa-api.vercel.app/api)
 
 ## Frontend Repository Link
 
