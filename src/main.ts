@@ -32,6 +32,7 @@ async function bootstrap() {
   const PORT = app.get(ConfigService).get('PORT') || 4000;
   app.enableCors({
     origin: frontendUrl,
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
   // app.enableCors();
   await app.listen(PORT);
