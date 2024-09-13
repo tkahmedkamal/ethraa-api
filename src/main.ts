@@ -30,11 +30,20 @@ async function bootstrap() {
   const frontendUrl = app.get(ConfigService).get('FRONT_BASE_URL');
 
   const PORT = app.get(ConfigService).get('PORT') || 4000;
-  // app.enableCors({
-  //   origin: frontendUrl,
-  //   methods: ['GET', 'POST', 'PATCH', 'DELETE'],
-  // });
-  app.enableCors();
+  app.enableCors({
+    origin: frontendUrl,
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    credentials: true,
+    allowedHeaders: [
+      'Origin',
+      'X-Requested-With',
+      'Content-Type',
+      'Accept',
+      'Authorization',
+    ],
+    preflightContinue: false,
+  });
+  // app.enableCors();
   await app.listen(PORT);
 }
 bootstrap();
